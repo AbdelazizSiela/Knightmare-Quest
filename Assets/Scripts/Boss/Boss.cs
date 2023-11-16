@@ -62,9 +62,9 @@ public class Boss : MonoBehaviour
         switch (attackStage)
         {
             case 0:
-                numberOfCommands = 10;
+                numberOfCommands = 15;
                 commandSpeed = 10f;
-                timeBtwAttacks = 1.5f;
+                timeBtwAttacks = 1.25f;
                 break;
             case 1:
                 numberOfCommands = 15;

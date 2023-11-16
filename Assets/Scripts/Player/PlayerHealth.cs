@@ -48,6 +48,8 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
+        AudioManager.instance.PlaySound("Damage");
+
 
     }
 

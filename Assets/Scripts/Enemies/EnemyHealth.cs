@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int healthAmount = 100;
+    [SerializeField] public int healthAmount = 100;
 
     [Space(10)]
     [Header("Damage Feedback")]

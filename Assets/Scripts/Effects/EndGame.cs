@@ -52,16 +52,16 @@ public class EndGame : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
 
+        AudioManager.instance.PlaySound("last_scene");
         cam.transform.parent.GetComponent<CameraFollow>().enabled = false;
         cam.GetComponent<Animator>().SetTrigger("LastScene");
 
-        yield return new WaitForSeconds(3f);
-
-        lastScene.SetActive(true);
         for (int i = 0; i < thingsToDesactivate.Length; i++)
         {
             thingsToDesactivate[i].SetActive(false);
         }
+        yield return new WaitForSeconds(3f);
+        lastScene.SetActive(true);
 
         yield return new WaitForSeconds(3f);
         Time.timeScale = 1;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossCutscene : MonoBehaviour
 {
     [SerializeField] private Animator blackBarsAnim;
+    [SerializeField] private GameObject bossHUD;
     private DialogueBox dialogueBox;
 
     public static bool inCutscene;
@@ -26,6 +27,7 @@ public class BossCutscene : MonoBehaviour
 
     public void EndCutscene()
     {
+        bossHUD.SetActive(true);
         FindObjectOfType<PlayerMovement>().enabled = true;
         blackBarsAnim.SetTrigger("Desactivate");
 

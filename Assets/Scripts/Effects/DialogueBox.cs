@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
 {
     [SerializeField] private Animator dialogueBoxAnimator;
     private DialoguePhrases dialoguePhrase;
     private TypeWriterEffect typeWriterEffect;
-    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI dialogueText,talkerNameText;
+    [SerializeField] private Sprite playerSprite, bossSprite;
+    [SerializeField] private Image talkerImage;
+
 
     private void Start()
     {
@@ -31,8 +35,24 @@ public class DialogueBox : MonoBehaviour
             dialogueBoxAnimator.SetTrigger("Cutscene_pop");
         }
 
+        string talkerName = dialogue.Substring(0, dialogue.IndexOf(":"));
+        talkerNameText.text = talkerName;
+        switch(talkerName.Substring(0,talkerName.Length))
+        {
+            case "Player":
+                talkerImage.sprite = playerSprite;
+                break;
+
+            case "Boss":
+                talkerImage.sprite = bossSprite;
+                break;
+
+        }
+
+        dialogue = dialogue.Substring(dialogue.IndexOf(":") + 2);
+
         dialogueText.text = dialogue;
-        typeWriterEffect.StartTypewriter(isCutscene);
+        typeWriterEffect.StartTypewriter(isCutscene,talkerName);
 
     }
     public void StopDialogue(bool isCutscene)

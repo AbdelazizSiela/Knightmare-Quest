@@ -104,6 +104,7 @@ public class Melee : MonoBehaviour
     private void Attack()
     {
         anim.SetTrigger("Attack");
+        AudioManager.instance.PlaySound("sword_swing");
 
         switch (playerMovement.direction)
         {
@@ -143,11 +144,17 @@ public class Melee : MonoBehaviour
     {
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            if (hitColliders[i].transform.CompareTag("Enemy") || hitColliders[i].transform.CompareTag("Boss"))
+            if (hitColliders[i].transform.CompareTag("Enemy"))
             {
                 EnemyHealth enemyHealth = hitColliders[i].transform.GetComponent<EnemyHealth>();
 
                 enemyHealth.TakeDamage(attackDamage, playerMovement.direction);
+            }
+            if (hitColliders[i].transform.CompareTag("Boss"))
+            {
+                BossHealth bossHealth = hitColliders[i].transform.GetComponent<BossHealth>();
+
+                bossHealth.TakeDamage(attackDamage, playerMovement.direction);
             }
             if (hitColliders[i].transform.CompareTag("Chair"))
             {
@@ -161,10 +168,19 @@ public class Melee : MonoBehaviour
                 hitColliders[i].transform.GetComponent<TableFlip>().FlipTable();
             }
         }
+
         for (int i = 0; i < enemiesBehindPlayer.Count; i++)
         {
             if (!hitColliders.Contains(enemiesBehindPlayer[i]))
             {
+                if (enemiesBehindPlayer[i].transform.CompareTag("Boss"))
+                {
+                    BossHealth bossHealth = enemiesBehindPlayer[i].transform.GetComponent<BossHealth>();
+
+                    bossHealth.TakeDamage(attackDamage, playerMovement.direction);
+                    continue;
+                }
+
                 EnemyHealth enemyHealth = enemiesBehindPlayer[i].transform.GetComponent<EnemyHealth>();
 
                 enemyHealth.TakeDamage(attackDamage, playerMovement.direction);

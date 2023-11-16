@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float speedFactor;
 
     [HideInInspector] public bool canDash;
+    [HideInInspector] public bool isDashing;
 
     [HideInInspector] public string direction
     {
@@ -107,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftShift) && canDash && (horizonalMovement != 0 || verticalMovement != 0))
         {
+            isDashing = true;
             melee.DashAttack();
             speedFactor = dashSpeed;
 
@@ -138,9 +140,14 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Invoke("RecoverDash", timeBetweenDash);
+            Invoke("StopDash", 0.5f);
             canDash = false;
         }
 
+    }
+    private void StopDash()
+    {
+        isDashing = false;
     }
     private void RecoverDash()
     {

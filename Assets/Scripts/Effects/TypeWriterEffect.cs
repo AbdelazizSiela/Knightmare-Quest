@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,18 +15,24 @@ public class TypeWriterEffect : MonoBehaviour
     [SerializeField] private string leadingChar = "";
     [SerializeField] private bool leadingCharBeforeDelay = false;
 
+    [SerializeField] private AudioClip[] bossMumblingSounds,playerMumblingSounds;
+    [SerializeField] private AudioSource source;
+
     private DialogueBox dialogueBox;
 
     private bool isCutscene;
+    private string talkerName;
+    private int lastSoundIndex;
 
     private void Awake()
     {
         dialogueBox = FindObjectOfType<DialogueBox>();
     }
-    public void StartTypewriter(bool cutsceneState)
+    public void StartTypewriter(bool cutsceneState,string talker)
     {
         isCutscene = cutsceneState;
-
+        talkerName = talker;
+        
         StopAllCoroutines();
 
         writer = tmpProText.text;
@@ -54,6 +60,30 @@ public class TypeWriterEffect : MonoBehaviour
             }
             tmpProText.text += c;
             tmpProText.text += leadingChar;
+
+            switch(talkerName)
+            {
+                case "Boss":
+                    int randomIndex = lastSoundIndex;
+                    while (randomIndex == lastSoundIndex)
+                    {
+                        randomIndex = Random.Range(0, bossMumblingSounds.Length);
+                    }
+                    
+                    if (!source.isPlaying) source.PlayOneShot(bossMumblingSounds[randomIndex]);
+                    lastSoundIndex = randomIndex;
+                    break;
+                case "Player":
+                    int randomIndex2 = lastSoundIndex;
+                    while (randomIndex2 == lastSoundIndex)
+                    {
+                        randomIndex2 = Random.Range(0, playerMumblingSounds.Length);
+                    }
+
+                    if (!source.isPlaying) source.PlayOneShot(playerMumblingSounds[randomIndex2]);
+                    lastSoundIndex = randomIndex2;
+                    break;
+            }
             yield return new WaitForSeconds(timeBtwChars);
         }
 

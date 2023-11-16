@@ -48,7 +48,7 @@ public class BossCommand : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
-            if (!collision.GetComponent<PlayerMovement>().canDash) return;
+            if (collision.GetComponent<PlayerMovement>().isDashing) return;
 
             collision.GetComponent<PlayerHealth>().TakeDamage(25);
             BreakCommand();
