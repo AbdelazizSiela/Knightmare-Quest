@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 public class BossCommand : MonoBehaviour
 {
-    private TextMeshPro myText;
+    [SerializeField] private TextMeshPro myText;
 
     [SerializeField] private string[] commands;
     [SerializeField] private GameObject destroyParticle;
@@ -15,11 +15,11 @@ public class BossCommand : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, 10f);
-        myText = GetComponent<TextMeshPro>();
-
-        SetRandomColor();
+        //SetRandomColor();
         SetRandomText();
-        Invoke("SetColliderSize", 0.1f);
+        myText.text = "$" + myText.text;
+
+        //Invoke("SetColliderSize", 0.1f);
     }
     private void SetColliderSize()
     {

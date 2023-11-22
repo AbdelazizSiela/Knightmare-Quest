@@ -29,4 +29,8 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    public void ResetAudioSource()
+    {
+        source.pitch = 1;
+    }
 }

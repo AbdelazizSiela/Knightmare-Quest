@@ -548,7 +548,7 @@ MonoBehaviour:
   attackRadius: 2
   delayBetweenAttacks: 1
   safeTime: 0.75
-  damage: 25
+  damage: 50
 --- !u!1 &1306194209241397976
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +929,7 @@ MonoBehaviour:
   attackRadius: 2
   delayBetweenAttacks: 1
   safeTime: 0.75
-  damage: 25
+  damage: 50
 --- !u!1 &3529968692372411747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   attackRadius: 2
   delayBetweenAttacks: 1
   safeTime: 0.75
-  damage: 25
+  damage: 50
 --- !u!1 &7394948126554612175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   attackRadius: 2
   delayBetweenAttacks: 1
   safeTime: 0.75
-  damage: 25
+  damage: 50
 --- !u!1 &8390373434290730182
 GameObject:
   m_ObjectHideFlags: 0

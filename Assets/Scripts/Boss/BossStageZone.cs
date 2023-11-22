@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class BossStageZone : MonoBehaviour
 {
-    private Boss boss;
+    [SerializeField] private Boss boss;
 
     [SerializeField] private int stage;
 
     [SerializeField] GameObject[] otherStageZones;
 
-    private void Start()
-    {
-        boss = FindObjectOfType<Boss>();
-    
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))

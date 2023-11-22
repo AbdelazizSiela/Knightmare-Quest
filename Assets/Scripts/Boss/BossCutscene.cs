@@ -6,6 +6,8 @@ public class BossCutscene : MonoBehaviour
 {
     [SerializeField] private Animator blackBarsAnim;
     [SerializeField] private GameObject bossHUD;
+    [SerializeField] private GameObject boss;
+
     private DialogueBox dialogueBox;
 
     public static bool inCutscene;
@@ -17,6 +19,7 @@ public class BossCutscene : MonoBehaviour
 
     public void StartCutscene()
     {
+        boss.SetActive(true);
         FindObjectOfType<PlayerMovement>().StopPlayer();
 
         dialogueBox.StartDialogue(true);

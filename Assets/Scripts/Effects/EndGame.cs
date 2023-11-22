@@ -51,7 +51,7 @@ public class EndGame : MonoBehaviour
     IEnumerator Transition()
     {
         yield return new WaitForSeconds(0f);
-
+        AudioManager.instance.ResetAudioSource();
         AudioManager.instance.PlaySound("last_scene");
         cam.transform.parent.GetComponent<CameraFollow>().enabled = false;
         cam.GetComponent<Animator>().SetTrigger("LastScene");
