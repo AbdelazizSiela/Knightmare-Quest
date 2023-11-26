@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -26,13 +27,21 @@ public class EnemyHealth : MonoBehaviour
         if(healthAmount <= 0 )
         {
             FindObjectOfType<PhrasesTrigger>().OnEnemyKilled();
-            Destroy(gameObject);
+            GetComponent<EnemyMelee>().enabled = false;
+            GetComponent<AIUnit>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            anim.SetTrigger("Dead");
             return;
         }
 
         DamageFeedback(hitFromDirection);
     }
 
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
    private void DamageFeedback(string hitFromDirection)
    {
         DamageKnockback(hitFromDirection);

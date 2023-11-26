@@ -16,10 +16,13 @@ public class EnemyMelee : MonoBehaviour
 
     private LayerMask attackLayer;
 
+    private Animator anim;
+
     private void Start()
     {
         player = ReferencesManager.instance.player;
         attackLayer = ReferencesManager.instance.enemyAttackLayer;
+        anim = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -31,6 +34,7 @@ public class EnemyMelee : MonoBehaviour
             {
                 StartCoroutine(Attack());
                 cantAttack = true;
+                anim.SetTrigger("Attack");
             }
         }
     }
@@ -42,7 +46,7 @@ public class EnemyMelee : MonoBehaviour
 
         foreach (Collider2D hit in hitColliders)
         {
-            if (hit.transform.CompareTag("Player"))
+            if (hit.transform.CompareTag("Player") && !hit.transform.GetComponent<PlayerMovement>().isDashing)
             {
                 PlayerHealth playerHealth = hit.transform.GetComponent<PlayerHealth>();
 
@@ -50,7 +54,7 @@ public class EnemyMelee : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(delayBetweenAttacks);
+        yield return new WaitForSeconds(delayBetweenAttacks - safeTime);
         cantAttack = false;
 
     }

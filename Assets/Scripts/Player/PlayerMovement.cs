@@ -99,7 +99,6 @@ public class PlayerMovement : MonoBehaviour
         if (horizonalMovement != 0)
         {
             idleHorizonalDirection = horizonalMovement;
-            idleHorizonalDirection = horizonalMovement;
             idleVerticalDirection = 0;
         }
 
