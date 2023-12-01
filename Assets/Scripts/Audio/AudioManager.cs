@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
         {
             if (clips[i].name == clipName)
             {
-                source.pitch = Random.Range(.85f, 1.2f);
+                source.pitch = Random.Range(.85f, 1.1f);
                 source.PlayOneShot(clips[i]);
             }
         }

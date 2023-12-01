@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        Camera.main.GetComponent<Animator>().SetTrigger("Shake");
+
         currentHealthAmount -= damage;
 
         if(currentHealthAmount <= (maxHealthAmount / 2) && currentHealthAmount > 0)

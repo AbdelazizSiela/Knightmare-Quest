@@ -32,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
             GetComponent<NavMeshAgent>().enabled = false;
             GetComponent<Collider2D>().enabled = false;
             anim.SetTrigger("Dead");
+            Destroy(gameObject, 1f);
             return;
         }
 

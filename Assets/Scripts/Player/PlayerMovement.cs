@@ -107,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftShift) && canDash && (horizonalMovement != 0 || verticalMovement != 0))
         {
+            AudioManager.instance.PlaySound("dash");
             isDashing = true;
             melee.DashAttack();
             speedFactor = dashSpeed;
@@ -143,6 +144,11 @@ public class PlayerMovement : MonoBehaviour
             canDash = false;
         }
 
+    }
+    public void TakeAStepSound()
+    {
+        if(GetComponent<PlayerStats>().isOutside) AudioManager.instance.PlaySound("player_footstep_outside");
+        else AudioManager.instance.PlaySound("player_footstep_inside");
     }
     private void StopDash()
     {

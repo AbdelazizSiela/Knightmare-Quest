@@ -19,7 +19,6 @@ public class Chair : MonoBehaviour
 
         anim.SetTrigger("Break");
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1f);
         isDestroyed = true;
     }
     

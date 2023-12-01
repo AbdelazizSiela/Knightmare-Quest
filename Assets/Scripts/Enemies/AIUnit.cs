@@ -21,9 +21,13 @@ public class AIUnit : MonoBehaviour
 
     private Vector2 previousPosition;
 
+    private AudioSource source;
+    public AudioClip stepSound;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        source = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         AIManager.Instance.Units.Add(this);
         player = GameObject.Find("Player").transform;
@@ -112,6 +116,12 @@ public class AIUnit : MonoBehaviour
 
         anim.SetFloat("idleHorizonalDirection", idleHorizonalDirection);
         anim.SetFloat("idleVerticalDirection", idleVerticalDirection);
+    }
+    public void TakeAStep()
+    {
+        source.pitch = Random.Range(.85f, 1.1f);
+        source.PlayOneShot(stepSound);
+
     }
     private void OnDestroy()
     {
