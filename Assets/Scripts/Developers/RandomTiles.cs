@@ -17,18 +17,45 @@ public class RandomTiles : MonoBehaviour
 
     void Start()
     {
-        // Loop through the entire Tilemap and replace grass pattern 1 with grass pattern 2 randomly.
-        BoundsInt bounds = tilemap.cellBounds;
+        //// Loop through the entire Tilemap and replace grass pattern 1 with grass pattern 2 randomly.
+        //BoundsInt bounds = tilemap.cellBounds;
 
-        foreach (Vector3Int position in bounds.allPositionsWithin)
+        //foreach (Vector3Int position in bounds.allPositionsWithin)
+        //{
+        //    if (tilemap.GetTile(position) == grassPattern1 && !sideGrass.Contains(tilemap.GetTile(position)))
+        //    {
+        //        if (Random.value < randomTileChance)
+        //        {
+        //            tilemap.SetTile(position, grassPattern2);
+        //        }
+        //    }
+        //}
+        CopyTiles();
+    }
+
+    public Tilemap grassTilemap;
+    public Tilemap dirtTilemap;
+
+    void CopyTiles()
+    {
+        BoundsInt bounds = grassTilemap.cellBounds;
+
+        for (int x = bounds.x; x < bounds.x + bounds.size.x; x++)
         {
-            if (tilemap.GetTile(position) == grassPattern1 && !sideGrass.Contains(tilemap.GetTile(position)))
+            for (int y = bounds.y; y < bounds.y + bounds.size.y; y++)
             {
-                if (Random.value < randomTileChance)
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                TileBase dirtTIle = grassTilemap.GetTile(pos);
+
+                if (dirtTIle != null && dirtTIle == grassPattern1)
                 {
-                    tilemap.SetTile(position, grassPattern2);
+                    dirtTilemap.SetTile(pos, dirtTIle);
+                    grassTilemap.SetTile(pos, null);
                 }
             }
         }
     }
 }
+    
+
+
